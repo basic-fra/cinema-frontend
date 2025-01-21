@@ -1,0 +1,148 @@
+.movie-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  
+  .movie-list-container {
+    position: relative;
+    overflow: hidden;
+    max-width: 570px;
+    height: 400px;
+    margin: 20px auto;
+    border-radius: 5px;
+    background-color: rgb(19, 19, 19);
+  }
+  
+  .movie-list {
+    display: flex;
+    padding-top: 45px;
+    gap: 60px;
+    transition: transform 0.3s ease-in-out;
+    padding-left: calc((100% - 200px) / 2); /* Center first movie */
+    padding-right: calc((100% - 200px) / 2);
+  }
+  
+  .movie-box {
+    width: 200px;
+    height: 300px;
+    flex-shrink: 0;
+    perspective: 1000px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  
+  .movie-box.focus {
+    transform: scale(1.1); 
+    filter: brightness(1.1); 
+    z-index: 2; 
+  }
+  
+  .movie-box.dimmed {
+    filter: brightness(0.2);
+  }
+  
+  .movie-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d; /* Maintain 3D space */
+    transition: transform 0.6s; /* Smooth flip transition */
+  }
+  
+  .movie-box:hover .movie-card {
+    transform: rotateY(180deg); /* Flip the card on hover */
+  }
+  
+  .movie-front,
+  .movie-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hide back side when front is visible */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+  
+  .movie-front {
+    background-color: #343434;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .movie-poster {
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+  }
+  
+  .movie-title {
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #d6d6d6;
+  }
+  
+  .movie-back {
+    background-color: #f9f9f9;
+    transform: rotateY(180deg); /* Initially flipped */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .movie-description {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .movie-duration {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .nav-buttons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none; /* Prevent clicks on empty areas */
+  }
+  
+  .nav-buttons button {
+    pointer-events: all; /* Enable click on buttons */
+    background-color: #ffc907;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  
+  .nav-buttons button:hover {
+    opacity: 1;
+    background-color: #c79c01;
+  }
+  
+  .nav-buttons button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
