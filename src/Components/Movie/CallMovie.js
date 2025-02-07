@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { getMovies } from "../../Services/Movie";
+import { getMovies, getMovieById } from "../../Services/Movie";
 import "./CallMovie.css"; // Import the CSS file for styling
 
 const CallMovie = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0); // For navigation
+  const [MovieId, setMovieId] = useState(""); // State for movie ID input
+  const [selectedMovie, setSelectedMovie] = useState(null); // State for fetched movie
 
   const posterImages = [
     require("../Images/lotr1.jpg"), 
     require("../Images/lotr2.jpg"), 
     require("../Images/lotr3.jpg"), 
     require("../Images/avatar.jpg"), 
+    require("../Images/hobbit1.jpg"),
+    require("../Images/hobbit2.jpg"),
+
   ];
 
   const fetchMovies = async () => {
@@ -24,6 +29,23 @@ const CallMovie = () => {
       alert("Failed to load movies.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Fetch a movie by ID
+  const handleFetchMovieById = async () => {
+    if (!MovieId.trim()) {
+      alert("Please enter a valid movie ID.");
+      return;
+    }
+
+    try {
+      const movie = await getMovieById(MovieId.trim());
+      setSelectedMovie(movie);
+    } catch (error) {
+      console.error("Error fetching movie by ID:", error);
+      alert("Failed to fetch movie. Make sure the ID is correct.");
+      setSelectedMovie(null);
     }
   };
 
@@ -48,6 +70,7 @@ const CallMovie = () => {
   }
 
   return (
+    <div>
     <div className="movie-container">
       <h1>Movie Management</h1>
       <h2>Available Movies</h2>
@@ -90,6 +113,36 @@ const CallMovie = () => {
           </div>
         </div>
       )}
+    </div>
+      {/* Fetch Movie by ID */}
+      <div className="getMovieById">
+        <h3>Get movie by ID</h3>
+        <div>
+          <input
+            type="text"
+            placeholder="Enter movie ID"
+            value={MovieId}
+            onChange={(e) => setMovieId(e.target.value)}
+          />
+          <button onClick={handleFetchMovieById}>Fetch movie by ID</button>
+        </div>
+
+        {selectedMovie && (
+          <div>
+            <h4>Fetched Movie Details:</h4>
+            <p>
+              <strong>Title:</strong> {selectedMovie.title}
+            </p>
+            <p>
+              <strong>Description:</strong> {selectedMovie.description}
+            </p>
+            <p>
+              <strong>Duration:</strong> {selectedMovie.duration} minutes
+            </p>
+          </div>
+        )}
+      </div>
+
     </div>
   );
 };

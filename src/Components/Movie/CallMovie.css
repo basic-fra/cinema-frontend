@@ -3,8 +3,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Full viewport height */
     padding: 20px;
+    padding-top: 50px;
     font-family: Arial, sans-serif;
     text-align: center;
     box-sizing: border-box;
@@ -145,4 +145,17 @@
     background-color: #ccc;
     cursor: not-allowed;
   }
-  
+
+  .getMovieById {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+
+  .getMovieById h3 {
+    font-size: 24px;
+  }

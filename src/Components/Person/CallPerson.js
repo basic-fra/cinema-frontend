@@ -27,20 +27,31 @@ const CallPersons = ({ onLogin }) => {
   }, []);
 
   const handleCheckPerson = () => {
-    const personExists = persons.some(
-      (person) => person.name === name && person.password === password
+    const adminExists = persons.some(
+      (person) => person.name === name && person.password === password && person.role === "admin"
     );
 
-    if (personExists) {
-      if (name === "Frane Basic") {
+    const userExists = persons.some(
+      (person) => person.name === name && person.password === password && person.role === "user"
+    );
+
+    const user = persons.find(
+      (p) => p.name === name && p.password === password
+    );
+
+    console.log("person",user);
+
+    if (adminExists) {
+      if (name === "Frane Basic" && password ==="frane123" ) {
         alert("Admin login successful!");
         onLogin("admin"); // Pass "admin" role to onLogin
-      } else {
-        alert("User login successful!");
-        onLogin("user"); // Pass "user" role to onLogin
-      }
+      } 
+    } else if (userExists) {
+      localStorage.setItem("user", JSON.stringify({ id: user.personId, name: user.name }));
+      alert("User login successful!");
+      onLogin("user"); // Pass "admin" role to onLogin
     } else {
-      alert("Invalid credentials. Please try again.");
+      alert("Invalid credentials.");
     }
 
     setName("");
@@ -58,7 +69,7 @@ const CallPersons = ({ onLogin }) => {
         ) : (
           <ul>
             {persons.map((person, index) => (
-              <li key={index}>{person.name}</li>
+              <li key={index}>Name:{person.name} ,Pass:{person.password}, Role:{person.role}</li>
             ))}
           </ul>
         )}

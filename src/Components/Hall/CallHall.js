@@ -74,21 +74,21 @@ const CallHall = () => {
       
       {/* Dropdown list */}
       <select 
-  value={selectedHall ? selectedHall.HallId : ""}
-  onChange={(e) => {
-    const selectedId = e.target.value;
-    const cinemaHall = halls.find((cinemaHall) => cinemaHall.HallId === parseInt(selectedId));
-    setSelectedHall(cinemaHall);
-  }}
->
-  <option value="" disabled>Select hall</option>
-  {halls.map((cinemaHall) => (
-    <option key={cinemaHall.HallId} value={cinemaHall.HallId}>
-      {cinemaHall.name} - capacity: {cinemaHall.capacity}
-    </option>
-  ))}
-</select>
-</div>
+        value={selectedHall ? selectedHall.HallId : ""}
+        onChange={(e) => {
+          const selectedId = e.target.value;
+          const cinemaHall = halls.find((cinemaHall) => cinemaHall.HallId === parseInt(selectedId));
+          setSelectedHall(cinemaHall);
+        }}
+        >
+        <option value="" disabled>Select hall</option>
+        {halls.map((cinemaHall) => (
+          <option key={cinemaHall.HallId} value={cinemaHall.HallId}>
+            {cinemaHall.name} - capacity: {cinemaHall.capacity}
+          </option>
+        ))}
+      </select>
+      </div>
 
       {/* Fetch Cinema hall by ID */}
       <div className="getHallById">

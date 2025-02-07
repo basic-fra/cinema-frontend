@@ -34,9 +34,6 @@ const App = () => {
     } else if (role === "user") {
       return (
         <div>
-          {/* <button onClick={handleLogout} className="logout-button">
-            Log Out
-          </button> */}
           <UCallCinema />
         </div>
       );
